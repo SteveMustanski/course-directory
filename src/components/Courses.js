@@ -6,14 +6,14 @@ import {
 } from 'react-router-dom';
 
 // Import app components
-import HTML from './courses/HTML';
-import CSS from './courses/CSS';
-import JavaScript from './courses/JavaScript';
+import CourseContainer from './courses/CourseContainer';
+import { HTMLCourses, CSSCourses, JSCourses } from '../data/courses';
 
-const Courses = ({match}) => (
+
+const Courses = ({ match }) => (
   <div className="main-content courses">
     <div className="course-header group">
-      <h2>Courses</h2> 
+      <h2>Courses</h2>
       <ul className="course-nav">
         <li><NavLink to={`${match.url}/html`}>HTML</NavLink></li>
         <li><NavLink to={`${match.url}/css`}>CSS</NavLink></li>
@@ -22,12 +22,15 @@ const Courses = ({match}) => (
     </div>
 
     {/* nav for courses selecitons */}
-      <Route exact path={match.url} render={ () => <Redirect to={`${match.path}/html`}/>} />
-      
-      <Route path={`${match.path}/html`} component={HTML} />
-      <Route path={`${match.path}/css`} component={CSS} />
-      <Route path={`${match.path}/javascript`} component={JavaScript} />
-    </div>
+    <Route exact path={match.url} render={() => <Redirect to={`${match.path}/html`} />} />
+
+    <Route path={`${match.path}/html`}
+      render={() => <CourseContainer data={HTMLCourses} />} />
+    <Route path={`${match.path}/css`}
+      render={() => <CourseContainer data={CSSCourses} />} />
+    <Route path={`${match.path}/javascript`}
+      render={() => <CourseContainer data={JSCourses} />} />
+  </div>
 
 
 );
